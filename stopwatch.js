@@ -43,44 +43,41 @@ function createStopwatch() {
     container.appendChild(stopwatchDiv);
 
     let mainTimer = null;
-    let mainMilliseconds = 0;
+    let startTime = 0;
     let lapCount = 0;
     let lastLapEndTime = 0; // To store the total time of the previous lap
 
     function formatTime(totalMilliseconds) {
-        const totalSeconds = Math.floor(totalMilliseconds / 100);
+        const totalSeconds = Math.floor(totalMilliseconds / 1000); // Now dividing by 1000 for seconds
         const mins = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
         const secs = String(totalSeconds % 60).padStart(2, "0");
-        const hundredths = String(totalMilliseconds % 100).padStart(2, "0");
+        const milliseconds = totalMilliseconds % 1000;
+        const hundredths = String(Math.floor(milliseconds / 10)).padStart(2, "0"); // Get hundredths
         return `${mins}:${secs}.${hundredths}`;
     }
 
-    function updateMainDisplay() {
-        mainDisplay.textContent = formatTime(mainMilliseconds);
-    }
-
-    function updateLapDisplay() {
+    function updateDisplay() {
+        const now = Date.now();
+        const elapsedMilliseconds = now - startTime;
+        mainDisplay.textContent = formatTime(elapsedMilliseconds);
         if (lapList.lastChild) {
             const lastLapItem = lapList.lastChild;
-            const currentLapRunningTime = mainMilliseconds - lastLapEndTime;
-            const totalTime = mainMilliseconds;
+            const currentLapRunningTime = now - lastLapEndTime;
+            const totalTime = elapsedMilliseconds;
             lastLapItem.textContent = `Lap ${lapCount}: ${formatTime(currentLapRunningTime)} | ${formatTime(totalTime)}`;
         }
     }
 
     startButton.onclick = () => {
         if (!mainTimer) {
-            mainTimer = setInterval(() => {
-                mainMilliseconds++;
-                updateMainDisplay();
-                updateLapDisplay();
-            }, 10);
+            startTime = Date.now() - (mainTimer ? (Date.now() - startTime) : 0); // Adjust for pause
+            mainTimer = setInterval(updateDisplay, 10);
             if (lapCount === 0) {
                 lapCount = 1;
                 const lapItem = document.createElement("li");
                 lapItem.textContent = `Lap ${lapCount}: 00:00.00 | 00:00.00`;
                 lapList.appendChild(lapItem);
-                lastLapEndTime = 0; // Start the lap time from the beginning
+                lastLapEndTime = startTime;
             }
         }
     };
@@ -93,7 +90,7 @@ function createStopwatch() {
     resetButton.onclick = () => {
         clearInterval(mainTimer);
         mainTimer = null;
-        mainMilliseconds = 0;
+        startTime = 0;
         lapCount = 0;
         lastLapEndTime = 0;
         updateMainDisplay();
@@ -102,13 +99,13 @@ function createStopwatch() {
 
     lapButton.onclick = () => {
         if (mainTimer) {
-            const currentLapEndTime = mainMilliseconds;
-            const lapSplitTime = currentLapEndTime - lastLapEndTime;
+            const currentTime = Date.now();
+            const lapSplitTime = currentTime - lastLapEndTime;
             const lapItem = document.createElement("li");
-            lapItem.textContent = `Lap ${lapCount}: ${formatTime(lapSplitTime)} | ${formatTime(currentLapEndTime)}`;
+            lapItem.textContent = `Lap ${lapCount}: ${formatTime(lapSplitTime)} | ${formatTime(currentTime - startTime)}`;
             lapList.appendChild(lapItem);
             lapCount++;
-            lastLapEndTime = currentLapEndTime;
+            lastLapEndTime = currentTime;
         }
     };
 
