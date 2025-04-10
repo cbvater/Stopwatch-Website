@@ -3,104 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiple Stopwatches</title>
+    <title>Stopwatch for IS Distance</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #393939;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
 
-    h1 {
-        background-color: #4CAF50;
-        color: white;
-        padding: 20px;
-        margin: 0;
-        font-size: 24px;
-    }
+        h1 {
+            background-color: #171717;
+            color: #ffeaea;
+            padding: 20px;
+            margin: 0;
+            font-size: 24px;
+        }
 
-    #stopwatches {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-    }
+        #stopwatches {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
 
-    .stopwatch {
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        padding: 20px;
-        background-color: #fff;
-        width: 350px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
+        .stopwatch {
+            margin-bottom: 20px;
+            border: 1px solid #000000;
+            padding: 20px;
+            background-color: #292929;
+            width: 350px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .stopwatch h3 {
-        font-size: 20px;
-        margin: 0;
-        text-align: center;
-        color: #333;
-    }
+        .stopwatch input {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 20px; /* Added margin-bottom to create space between name and time */
+            margin-left: 60px; /* Centering the input field */
+            margin-right: auto; /* Centering the input field */
+            text-align: center; /* Centering the text inside the input field */
+            padding: 5px; border: 1px solid #ccc; border-radius: 5px; width: 60%; /* Adjusted width to make it visually appealing */
+        }
 
-    .stopwatch span {
-        display: block;
-        font-size: 28px;
-        margin-bottom: 20px;
-        font-weight: bold;
-    }
+        .stopwatch span {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
 
-    .stopwatch button {
-        padding: 10px 20px;
-        margin: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        border: none;
-        border-radius: 5px;
-        background-color: #4CAF50;
-        color: white;
-        transition: background-color 0.3s ease;
-    }
+        .stopwatch button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #e48800;
+            color: #000000;
+            transition: background-color 0.3s ease;
+        }
 
-    .stopwatch button:hover {
-        background-color: #45a049;
-    }
+        .stopwatch button:hover {
+            background-color: #ffffff;
+        }
 
-    .stopwatch ul {
-        list-style-type: none;
-        padding: 0;
-        margin-top: 10px;
-    }
+        .stopwatch ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
 
-    .stopwatch ul li {
-        font-size: 18px;
-        margin-bottom: 5px;
-        color: #555;
-    }
+        .stopwatch ul li {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
 
-    #addStopwatch {
-        padding: 15px;
-        font-size: 18px;
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+        #addStopwatch {
+            padding: 15px;
+            font-size: 18px;
+            background-color: #e48800;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-    #addStopwatch:hover {
-        background-color: #0056b3;
-    }
-</style>
-
+        #addStopwatch:hover {
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
 </head>
 <body>
-    <h1>Multiple Stopwatches</h1>
-    <button onclick="createStopwatch()">Add New Stopwatch</button>
-    <div id="stopwatches"></div>
+    <h1>IS Distance Stopwatch</h1>
     <script src="stopwatch.js"></script>
 </body>
 </html>
